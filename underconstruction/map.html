@@ -1,26 +1,25 @@
 <!DOCTYPE HTML>
 <meta charset="utf-8">
 <title>Exploring Opportunity</title>
-<link rel="stylesheet" type="text/css" href="styles/map.css"></link> 
+<link rel="stylesheet" type="text/css" href="styles/map.css"> 
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway" rel="stylesheet">
 <body>
 	<div class="contentWrapper">
-			<div id="mapLoader0">
-				<div id="mapLoader1"></div>
-			</div>
-		<h1>ExploO</h1>
+		<div id="mapLoader0"></div>
+		<h1>Exploring Opportuntiy</h1>
 		<div class="mainContent" id="mapContainer"></div>
 		<div class="mainContent" id="input-field">
 			<div id="showInput" onclick="showHide()"></div>
 			<div id="inputContainer">
 				<div class="container" id="outcomeContainer">
-					<h2>Explore the Mobility Data</h2>
+					<h2>Mapping Mobility</h2>
 				</div>
 				<div class="container">
 					Choose any of the outcomes or other covariates included in the
 					social mobility dataset.
 					<select id="outcomeSelector">
 						<option>perm_res_p25_kr26</option>
-					<select>
+					</select>
 					For complete documentation and explanation of the variable names 
 					scheme please visit 
 					<a href="https://www.equality-of-opportunity.org/" target="_blank">Equality of Opportunity</a> 
@@ -55,8 +54,10 @@
 							</select>
 						</div>
 						<div class="selectPreview" id="idPreview"></div>
+						<div class="cleared"></div>
 						<div id="infoDiv"></div>
 					</div>
+					<div class="cleared"></div>
 					<h4>Outcome:</h4>
 					<p>Select the outcome you'd like to explore</p>
 					<div class="selectContainer">
@@ -98,9 +99,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="resultsContainer">This is the bottom</div>
-		<div id="cleared"></div>
 	</div>
+	<div id="uploadContainer">Bottom</div>
 	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
 	<script src="//d3js.org/topojson.v1.min.js"></script>
 	<script src="http://www.numericjs.com/lib/numeric-1.2.6.min.js"></script>
