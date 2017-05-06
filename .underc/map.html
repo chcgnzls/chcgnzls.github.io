@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8">
+<title>Exploring Opportunity</title>
+<link rel="stylesheet" type="text/css" href="styles/map.css"></link> 
+<body>
+	<div class="contentWrapper">
+			<div id="mapLoader0">
+				<div id="mapLoader1"></div>
+			</div>
+		<h1>ExploO</h1>
+		<div class="mainContent" id="mapContainer"></div>
+		<div class="mainContent" id="input-field">
+			<div id="showInput" onclick="showHide()"></div>
+			<div id="inputContainer">
+				<div class="container" id="outcomeContainer">
+					<h2>Explore the Mobility Data</h2>
+				</div>
+				<div class="container">
+					Choose any of the outcomes or other covariates included in the
+					social mobility dataset.
+					<select id="outcomeSelector">
+						<option>perm_res_p25_kr26</option>
+					<select>
+					For complete documentation and explanation of the variable names 
+					scheme please visit 
+					<a href="https://www.equality-of-opportunity.org/" target="_blank">Equality of Opportunity</a> 
+				</div>
+				<div id="spacer" style="height: 10px"></div>
+				<div class="container" id="inputHeading">
+					<h2>Use your own data!</h2>
+				</div>
+				<div class="container" id="uploadContainer">
+					<h3>Upload a local <span class="mono">.csv</span></h3>
+					<input type="file" id="input">
+				</div>
+				<div id="previewContainer"></div>
+				<div class="container" id="mergeContainer">
+					<h3>Select variables</h3>
+					<h4>Merge:</h4>
+					<p>Choose a variable that uniquely matches your geographies. It 
+						must be a character sting concatenation of the two-digit State and 
+						three-digit County FIPS codes with leading zeros. 
+					</p>
+					<p>For example: <span class="mono">35039</span> or 
+						<span class="mono">01001</span>
+					</p>
+					<p>Missing values, should be of the form: 
+						<span class="mono">NA</span> or
+						<span class="mono">NaN</span>
+					</p>
+					<div class="selectContainer" id="mergeSelectContainer">
+						<div class="selectDiv">
+							<select id="idSelect">
+								<option id="load"></option>
+							</select>
+						</div>
+						<div class="selectPreview" id="idPreview"></div>
+						<div id="infoDiv"></div>
+					</div>
+					<h4>Outcome:</h4>
+					<p>Select the outcome you'd like to explore</p>
+					<div class="selectContainer">
+						<div class="selectDiv">
+							<select id="yourOutcome">
+								<option id="load"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div id="spacer" style="height: 10px"></div>
+				<div class="container" id="modelHeading">
+					<h2>Create a predictive model</h2>
+				</div>
+				<div class="container" id="lhsContainer">
+					<h4>LHS:</h4>
+					<p>Choose the outcome that you would like to predict. It can be 
+						from the Mobility dataset or the one that you uploaded.
+					</p>
+					<div class="selectContainer">
+						<div class="selectDiv">
+							<select id="lhsSelect">
+								<option id="load"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="container" id="rhsContainer">
+					<h4>RHS:</h4>
+					<p>Choose the set of variable that you would like to use to build your
+						predictive model.
+					</p>
+					<div class="selectContainer">
+						<div class="checkboxContainer" id="leftCheckbox"></div>
+						<div class="checkboxContainer" id="rightCheckbox"></div>
+					</div>
+					<div id="previewChecked"></div>
+					<button id="predict">Predict!</button>
+				</div>
+			</div>
+		</div>
+		<div id="resultsContainer">This is the bottom</div>
+		<div id="cleared"></div>
+	</div>
+	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	<script src="//d3js.org/topojson.v1.min.js"></script>
+	<script src="http://www.numericjs.com/lib/numeric-1.2.6.min.js"></script>
+	<script src="scripts/map.js"></script>
+</body>
