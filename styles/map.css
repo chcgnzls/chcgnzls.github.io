@@ -1,0 +1,488 @@
+/* MAP */
+.background {
+	fill: none;
+	pointer-events: all;
+}
+
+.land {
+	fill: #ddd;
+	stroke: #fff;
+	stroke-opacity: 0;
+}
+
+/* CLASSES */
+.cleared {
+	clear: both;
+	height: 10px;
+}
+.container {
+	background: rgba(252, 247, 247, 0.68);
+	width: 295px;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.dataC {
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+	width: 31%;
+}
+.mono {
+	font-family: monospace;
+}
+.preview-box {
+	font-family: monospace;
+	background: #222130;	
+	color: snow;
+	border-radius: 5px;
+	width: inherit;
+	padding: 0px;
+	margin: 5px;
+	overflow-x: auto;
+	box-shadow: 1px 1px 5px #555 inset;
+}
+.rhs {
+	display: block;
+}
+.tooltipOption {
+	display: block;
+}
+.topBr {
+	border-top: 1px solid #222130;
+}
+.botBrD {
+	border-bottom: 4px double #222130;
+}
+.botBr {
+	border-bottom: 1px solid #222130;
+}
+select.transform {
+	font-family: 'Crimson+Text', serif;
+	font-style: italic;
+}
+/* IDS */
+#bottomBar {
+	height: 400px;
+	padding-left: 50px;
+	padding-right: 50px;
+	text-align: justify;
+	background: #222130;
+	color: snow;
+}
+#bottomBar {
+	height: 200px;
+	background: #222130;
+	color: snow;
+}
+#colorInput {
+	font-family: monospace;
+	color: #222130;
+	background: #fff;
+}
+#input-field {
+	opacity: 0;
+	position: absolute;
+	right: 9px;
+	width: inherit;
+	height: 546px;
+	background-color: rgba(228, 228, 228, .95);
+	border-radius: 7px;
+}
+#regTableContainer {
+	float: left;
+	width: 39%;
+	height: 520px;
+}
+#regTable {
+	max-height: 408px;
+	width: 95%;
+	overflow-x: auto;
+}
+#plot {
+	height: 100%;
+	width: 100%;
+}
+#plotContainer {
+	float: left;
+	height: 520px;
+	overflow: auto;
+	width: 59%;
+}
+#results {
+	float: right;
+	width: 100%;
+	height: 520px;
+	margin: 10px auto;
+}
+#resultsSidebar{
+	position: absolute;
+	background-color: rgba(228, 228, 228, .95);
+	height: 520px;
+	border-radius: 7px;
+}
+#plotSidebar {
+	position: absolute;
+	right: 9px;
+	background-color: rgba(228, 228, 228, .95);
+	height: 520px;
+	border-radius: 7px;
+}
+#resultsOpts {
+	float: left;
+	max-width: 650px;
+	height: inherit;
+	border-radius: 7px;
+	overflow: auto;
+	overflow-x: hidden;
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: ease-in-out;
+}
+#plotOpts {
+	float: right;
+	max-width: 650px;
+	height: inherit;
+	border-radius: 7px;
+	overflow: auto;
+	overflow-x: hidden;
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: ease-in-out;
+}
+#resultsOpts.closed, #plotOpts.closed {
+	max-width: 0;
+}
+#showResults {
+	float: left;
+	height: inherit;
+	width: 30px;
+	background: rgba(255,255,255,.4);
+	transition: background .5s;
+	border-radius: 7px;
+}
+#showPlot {
+	float: left;
+	height: inherit;
+	width: 30px;
+	background: rgba(255, 255, 255, .4);
+	transition: background .5s;
+	border-radius: 7px;
+}
+#showPlot:hover, #showResults:hover {
+	background: rgba(175, 175, 175, .8);
+	transition: background .5s;
+	border-radius: 7px;
+}
+#idSelect {
+	width: 75%;
+}
+#inputContainer {
+	float: left;
+	max-width: 650px;
+	height: inherit;
+	overflow: auto;
+	overflow-x: hidden;
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: ease-in-out;
+}
+
+#inputContainer.closed {
+	max-width: 0;
+}
+
+#lhsSelect {
+	width: 100%;
+}
+#binNumber {
+	width: 56px;
+}
+#mapContainer {
+	opacity: 0;
+	float: left;
+	width: 100%;
+	height: 520px;
+	margin: 0 auto;
+}
+#resultsContainer {
+	opacity: 0;
+	float: left;
+	width: 100%;
+	margin: 0 auto;
+	background: #f9f9f9; 
+}
+#mapLoader0 {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+	animation: flickerAnimation 2s infinite;
+}
+
+#merged, #missing {
+	cursor: default;
+}
+.mergeShadow {
+	opacity: .5;
+}
+#mergeResults {
+	opacity: .5;
+}
+#modelHeading{
+	display: none;
+}
+#information {
+	width: 94%;
+	height: 70px;
+	overflow: auto;
+}
+#outcomeSelector {
+	display: block;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#previewChecked {
+	font-family: monospace;	
+	margin-top: 5px;
+}
+#previewShadow {
+	opacity: .5;
+}
+#rhsSelect {
+	max-height: 323px;
+	overflow: auto;
+}
+
+#showInput:hover {
+	background: rgba(175, 175, 175, .8);
+	transition: background .5s;
+	border-radius: 7px;
+}
+
+#dropdown:hover {
+	background: rgba(175, 175, 175, .8);
+	transition: background .5s;
+	border-radius: 7px;
+}
+
+#dropdown {
+	float: left;
+	height: 30px;
+	width: 100%;
+	background: rgba(255,255,255,.4);
+	transition: background .5s;
+	border-radius: 7px;
+}
+
+#dropContainer{
+	background: rgba(228,228,228,.95);
+	border-radius: 7px;
+	margin: 64px;
+	margin-top: 24px;
+}
+
+#dataContainer {
+	max-height: 300px;
+	padding: 8px;
+	width: 100%;
+	overflow: auto;
+	overflow-y: hidden;	
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: ease-in-out;
+}
+#dataContainer.closed {
+	max-height: 0;
+	padding: 0;
+}
+
+#showInput {
+	float: left;
+	height: inherit;
+	width: 30px;
+	background: rgba(255,255,255,.4);
+	transition: background .5s;
+	border-radius: 7px;
+}
+#uploadPreview {
+	height: 151px;
+	width: 96%;
+	overflow-y: hidden;
+}
+#yourOutcome {
+	width: 220px;
+}
+
+#predict {
+	cursor: default;
+	opacity: .5;
+}
+
+.bttn {
+	display: inline-block;
+	cursor: pointer;
+	background: #f0f0f0;
+	margin: 5px;
+	padding-left: 4px;
+	padding-right: 4px;
+	border-radius: 2px;
+	box-shadow: 1px 1px 2px;
+}
+@keyframes flickerAnimation {
+	0%   { 
+		background: #db0631; 
+	}
+	25% {
+		background: #fff;	
+	}
+	50%  { 
+		background: #535650; 
+	}
+	75% { 
+		background: #fff;	
+	}
+	100% {
+		background: #db0631; 
+	}
+}
+
+/* ELEMENTS */
+select {
+	font-family: monospace;
+	width: 90px;
+}
+svg {
+	display: block;
+	margin: auto;
+}
+h1,h2,h3,h4,h5,h6 {
+	color: #222130;
+}
+h2 {
+	font-family: 'Playfair Display', serif;
+	margin-left: 5px;
+}
+h2,h3 {
+	font-weight: normal;
+}
+h1 {
+	font-family: 'Abril Fatface', cursive;
+	font-weight: normal;
+	font-size: 48px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+h2 {
+	margin: auto;
+}
+h2.instructions {
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+h3 {
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+h4 {
+	margin: 0px;
+	margin-bottom: 10px;
+}
+h5 {
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+p {
+	margin-top: 0px;
+}
+p.instructions {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+th {
+	text-align: left;
+}
+tr {
+	white-space: nowrap;
+}
+div.tooltip {
+	font-family: 'Raleway', sans-serif;
+	position: absolute;
+	text-align: left;
+	padding: 4px;
+	background: #efefef;
+	background: rgba(239, 239, 239, .9);
+	border: 0px;
+	border-radius: 5px;
+	pointer-events: none;
+}
+div.tooltip h1 {
+	font-family: 'Raleway', sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 4px;
+}
+td.data {
+	font-family: 'Open Sans', sans-serif;
+	text-align: right;
+	width: 80px;
+}
+div {
+	font-family: 'Raleway', sans-serif;
+	color: #222130;
+}
+table.reg {
+	font-family: 'Old Standard TT', serif;
+	border-collapse: collapse;
+	width: 100%;	
+}
+td.var {
+	vertical-align: top;
+	min-width: 220px;
+	padding: 2px;
+	padding-left: 16px;
+}
+td.coef {
+	vertical-align: top;
+	padding: 2px;
+	text-align: center;
+}
+tr.reg:hover{
+	background-color: rgba(211, 211, 211, .5);
+}
+select.full {
+	width: 100%;
+}
+
+.axis path, 
+.axis line {
+	fill: none;
+	stoke: #222130;
+	shape-rendering: crispEdges;
+}
+
+.point {
+	fill: #666;
+	fill-opacity: .9;
+	transition: fill-opacity .5s;
+}
+.point:hover {	
+	fill-opacity: .5;
+	transition: fill-opacity .5s;
+}
+.label {
+	stroke:none;
+	fill: #222130;
+}
