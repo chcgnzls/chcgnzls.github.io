@@ -1,0 +1,12 @@
+h1 {
+	font-family: 'Abril Fatface', cursive;
+	font-width: normal;
+	text-align: center;
+	font-size: 160px;
+}
+p {
+	font-family: 'Cardo', serif;
+	text-align: center;
+	font-style: italic;
+	font-size: 20px;
+}
