@@ -1,6 +1,6 @@
 h1 {
 	font-family: 'Abril Fatface', cursive;
-	font-width: normal;
+	font-weight: normal;
 	text-align: center;
 	font-size: 160px;
 }
@@ -9,4 +9,20 @@ p {
 	text-align: center;
 	font-style: italic;
 	font-size: 20px;
+}
+#par {
+	position: relative;
+}
+#h0, #h1 {
+	position: absolute;
+	width: 100%;
+}
+#h1 {
+	right: -8px;
+	color: #BA0C2F;
+	opacity: .8;
+}
+#h0 {
+	color: #7A7D81;
+	opacity: .8;
 }
