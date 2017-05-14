@@ -65,8 +65,8 @@
 					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
 					<select class="full transform" id="outMonTrans">
 						<option class="null" value="null"></option>
-						<option value="logx">log(x&#7522; + min{-x + 1 | x &le; 0})</option>
-						<option value="sqrtx">sqrt(x&#7522; + min{-x | x &lt; 0})</option>
+						<option value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
 						<option value="expx">exp(x&#7522;)</option>
 				</select>
 				</div>
@@ -120,8 +120,8 @@
 					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
 					<select class="full transform" id="indMonTrans">
 						<option class="load" value="null"></option>
-						<option class="transform" value="logx">log(x&#7522; + min{-x + 1 | x &le; 0})</option>
-						<option class="transform" value="sqrtx">sqrt(x&#7522; + min{-x | x &lt; 0})</option>
+						<option class="transform" value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option class="transform" value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
 						<option class="transform" value="expx">exp(x&#7522;)</option>
 				</select>
 				</div>
@@ -133,8 +133,8 @@
 					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
 					<select class="full transform" id="depMonTrans">
 						<option class="null" value="null"></option>
-						<option value="logx">log(x&#7522; + min{-x + 1 | x &le; 0})</option>
-						<option value="sqrtx">sqrt(x&#7522; + min{-x | x &lt; 0})</option>
+						<option value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
 						<option value="expx">exp(x&#7522;)</option>
 					</select>
 				</div>
