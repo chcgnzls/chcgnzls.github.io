@@ -29,7 +29,7 @@
 }
 
 #main-nav li {
-	float: right;
+	float: left;
 	width: 33%;
 	display: inline-block;
 	font-size: 28px;
