@@ -486,3 +486,9 @@ select.full {
 	stroke:none;
 	fill: #222130;
 }
+a {
+	color: lightblue;
+}
+a:visited {
+	color: white;
+}
