@@ -53,6 +53,7 @@
 	border-top: 1px solid #222130;
 }
 .trendLine{
+	fill: none;
 	stroke: #222130;
 }
 .botBrD {

@@ -500,6 +500,7 @@ function makePlot(indVar, depVar){
 	var depVars = binData.map(function(d){return [1, d.depVar]});
 	var minDep = d3.min(binData, function(d){return d.depVar;});
 	var maxDep = d3.max(binData, function(d){return d.depVar;});
+	var depDiff = maxDep - minDep;
 	var indVars = binData.map(function(d){return d.indVar});
 	
 	if(document.getElementById("trendSelect").value === "line"){
@@ -507,8 +508,16 @@ function makePlot(indVar, depVar){
 		var b = nm.dot(XtXinv, nm.dot(nm.transpose(depVars), indVars));	
 		var line = [xMap(minDep), yMap(minDep * b[1] + b[0]), xMap(maxDep), yMap(maxDep * b[1] + b[0])];
 		plot.append("line").attr("class", "trendLine").attr("x1", line[0]).attr("y1", line[1]).attr("x2", line[2]).attr("y2", line[3]);
+	} else if(document.getElementById("trendSelect").value === "quad"){
+		depVars = depVars.map(function(d){return [1, d[1], Math.pow(d[1], 2)];});
+		var XtXinv = nm.inv(nm.dot(nm.transpose(depVars), depVars));
+		var b = nm.dot(XtXinv, nm.dot(nm.transpose(depVars), indVars));	
+		var points = Array(400).fill(0).map(function(d, i){return minDep + depDiff * i / 400;}).concat([maxDep]);
+		var xPoints = points.map(xMap); 
+		var yPoints = points.map(function(d){return yMap(Math.pow(d, 2) * b[2] + d * b[1] + b[0]);});
+		var polyline = xPoints.map(function(d,i){return d + "," + yPoints[i];}).join(" ");
+		plot.append("polyline").attr("class", "trendLine").attr("points", polyline);
 	}
-
 }
 function trans(arr, id){
 	var func = document.getElementById(id).value;
