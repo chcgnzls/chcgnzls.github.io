@@ -185,6 +185,7 @@ d3.select("#previewTable").selectAll("tr")
 						document.body.removeChild(link);
 				};
 			}
+			
 			matches.map(function(i, j){
 				if(yourData[i] !== undefined){
 					keys.map(function(k){
@@ -199,7 +200,24 @@ d3.select("#previewTable").selectAll("tr")
 					.reduce(function(acc, val){return Number(acc) + Number(val);}, 0);
 			var totalPop = mobData.map(function(d){return d.cty_pop2000;})
 					.reduce(function(acc, val){return Number(acc) + Number(val);}, 0);
+			document.getElementById("merged").addEventListener("click", getMergedCSV, false);
+			function getMergedCSV (){
+				var mKeys = Object.keys(mobData[0]);
+				var lines = mobData.map(function(d){return mKeys.map(function(k){return '"' + d[k] + '"';}).join();}).join("\n");
+				var csv = [mKeys.join()].concat(lines).join("\r\n");
+				csv = new Blob([csv], {type: "text/csv"});
+				var csvUrl = URL.createObjectURL(csv);
 
+				var link = document.createElement("a");
+				link.href = csvUrl;
+				link.target = "_blank";
+				link.download = "merged.csv";
+				link.style.display = "none";
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link); 
+			}
+	
 			d3.select("#information").style("padding", "5px")
 				.html("-- " + matched + " of " + yourData.length + " (" 
 					+ fdp(matched / yourData.length) + ") were matched to " 
@@ -208,8 +226,8 @@ d3.select("#previewTable").selectAll("tr")
 					+ " of the total US population in 2000.");
 			document.getElementById("mergeResults").style.opacity = 1;
 			document.getElementById("missing").style.cursor = "pointer";
-			document.getElementById("merged").style.opacity = 0.5;
-	//		document.getElementById("merged").style.cursor = "pointer";
+			document.getElementById("merged").style.opacity = 1;
+			document.getElementById("merged").style.cursor = "pointer";
 
 			selectors[2].addEventListener("change", genMap, false);
 
@@ -309,7 +327,7 @@ function genMap() {
 function drawMap(error, usa) {
 	if (error) throw console.log(error);
 	d3.select("#mapLoader0").remove();
-//	document.getElementById("dropdown").click();
+//	document.getElementById("dropdown").click()				var lines = mobData.map(function(d){return ;
 
 	cty = topojson.feature(usa, usa.objects.cty).features;
 	for(var i = 0; i < cty.length; i++){
