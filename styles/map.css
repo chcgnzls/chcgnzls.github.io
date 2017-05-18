@@ -52,6 +52,9 @@
 .topBr {
 	border-top: 1px solid #222130;
 }
+.trendLine{
+	stroke: #222130;
+}
 .botBrD {
 	border-bottom: 4px double #222130;
 }

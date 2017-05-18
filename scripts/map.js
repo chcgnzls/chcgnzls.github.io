@@ -4,7 +4,7 @@ var plotMargin = {top: 20, right: 20, bottom: 30, left: 80};
 var mapMargin = {top: 5, right: 10, bottom: 5, left: 10};
 
 var mapThis = []; 
-var thisVal;
+var thisVal, xMap, yMap;
 var projScale = 1.05;
 var width = 960 * projScale, 
 		height = 520 * projScale,
@@ -327,8 +327,7 @@ function genMap() {
 function drawMap(error, usa) {
 	if (error) throw console.log(error);
 	d3.select("#mapLoader0").remove();
-//	document.getElementById("dropdown").click()				var lines = mobData.map(function(d){return ;
-
+	//document.getElementById("dropdown").click()				
 	cty = topojson.feature(usa, usa.objects.cty).features;
 	for(var i = 0; i < cty.length; i++){
 		mobData.push(cty[i].properties.outcomes);
@@ -375,8 +374,7 @@ function drawMap(error, usa) {
 
 function OLSmodel() {
 	d3.select("table.reg").remove();
-	var lhsSelector = document.getElementById("lhsSelect");
-	var lhsVar = lhsSelector.value;
+	var lhsVar = document.getElementById("lhsSelect").value;
 	var coeffNames = ["Intercept"].concat(rhsVars);
 
 	var ym = mobData.map(function(d){return +d[lhsVar];});
@@ -467,22 +465,23 @@ function makePlot(indVar, depVar){
 		indVars = trans(indVars, "indMonTrans");
 		var binData = mData.map(function(d,i){return {indVar: indVars[i], depVar: depVars[i], depSize: 2};});
 	} 
+	
 	var width = document.getElementById("plot").offsetWidth - plotMargin.left - plotMargin.right,
 			height = document.getElementById("plot").offsetHeight - plotMargin.top - plotMargin.bottom;
 
-	var x = d3.scaleLinear().range([0, width]);
-	var y = d3.scaleLinear().range([height, 0]);
+	xMap = d3.scaleLinear().range([0, width]);
+	yMap = d3.scaleLinear().range([height, 0]);
 	
-	var xAxis = d3.axisBottom(x);
-	var yAxis = d3.axisLeft(y);
+	var xAxis = d3.axisBottom(xMap);
+	var yAxis = d3.axisLeft(yMap);
 
 	var plot = d3.select("#plot").append("svg")
 		.attr("width", width + plotMargin.left + plotMargin.right)
 		.attr("height", height + plotMargin.top + plotMargin.bottom)
-		.append("g").attr("transform", "translate(" + plotMargin.left + "," + plotMargin.top + ")");
+		.append("g").attr("transform", "translate(" + plotMargin.left + "," + plotMargin.top + ")").attr("id", "scatterPlot");
 
-	x.domain(d3.extent(binData, function(d){return d.depVar;})).nice();	
-	y.domain(d3.extent(binData, function(d){return d.indVar;})).nice();	
+	xMap.domain(d3.extent(binData, function(d){return d.depVar;})).nice();	
+	yMap.domain(d3.extent(binData, function(d){return d.indVar;})).nice();	
 	
 	plot.append("g").attr("class", "x axis")
 		.attr("transform", "translate(0," + height + ")").call(xAxis)
@@ -495,8 +494,21 @@ function makePlot(indVar, depVar){
 
 	plot.selectAll(".point").data(binData).enter().append("circle")
 		.attr("class", "point").attr("r", function(d){return d.depSize;})
-		.attr("cx", function(d){return x(d.depVar);})
-		.attr("cy", function(d){return y(d.indVar);});
+		.attr("cx", function(d){return xMap(d.depVar);})
+		.attr("cy", function(d){return yMap(d.indVar);});
+
+	var depVars = binData.map(function(d){return [1, d.depVar]});
+	var minDep = d3.min(binData, function(d){return d.depVar;});
+	var maxDep = d3.max(binData, function(d){return d.depVar;});
+	var indVars = binData.map(function(d){return d.indVar});
+	
+	if(document.getElementById("trendSelect").value === "line"){
+		var XtXinv = nm.inv(nm.dot(nm.transpose(depVars), depVars));
+		var b = nm.dot(XtXinv, nm.dot(nm.transpose(depVars), indVars));	
+		var line = [xMap(minDep), yMap(minDep * b[1] + b[0]), xMap(maxDep), yMap(maxDep * b[1] + b[0])];
+		plot.append("line").attr("class", "trendLine").attr("x1", line[0]).attr("y1", line[1]).attr("x2", line[2]).attr("y2", line[3]);
+	}
+
 }
 function trans(arr, id){
 	var func = document.getElementById(id).value;
@@ -528,6 +540,24 @@ function sqrtx(arr){
 }
 function expx(arr){
 	return arr.map(function(d){return Math.exp(d);});
+}
+
+function fitTrend(data) {
+	if(this.value === "line"){
+		var yname = document.getElementById("indVarSelect").value;
+		var xname = document.getElementById("depVarSelect").value;
+		var xy = mobData.map(function(d){return [1, +d[xname], +d[yname]];});
+		xy = xy.filter(function(d){return !isNaN(d[1]) && !isNaN(d[2]);});
+		x = xy.map(function(d){return d.slice(0,2);});
+		y = xy.map(function(d){return d.slice(2);});
+		y = [].concat.apply([], y);
+		var XtXinv = nm.inv(nm.dot(nm.transpose(x), x));
+		var b = nm.dot(XtXinv, nm.dot(nm.transpose(x), y));	
+		var line = [xMap(data[0]), yMap(data[0] * b[1] + b[0]), xMap(data[1]), yMap(data[1] * b[1] + b[0])];
+		d3.select("#scatterPlot").append("line")
+			.attr("x1", line[0]).attr("y1", line[1]) 
+			.attr("x2", line[2]).attr("y2", line[3]);
+	}	
 }
 
 //  Run
@@ -580,11 +610,19 @@ document.getElementById("binNumber").addEventListener("change", function(){
 	makePlot(indVarValue, depVarValue);
 	document.getElementById("resultsOpts").className = "closed";
 }, false);
+document.getElementById("trendSelect").addEventListener("change", function(){
+	var indVarValue = document.getElementById("indVarSelect").value;
+	var depVarValue = document.getElementById("depVarSelect").value;
+	d3.select("#plot").select("svg").remove();
+	makePlot(indVarValue, depVarValue);
+	document.getElementById("resultsOpts").className = "closed";
+}, false);
+
 document.getElementById("outMonTrans").addEventListener("change", genMap, false);
 document.getElementById("colorInput").addEventListener("change", function(){
 	colorRange = JSON.parse(this.value);
 	genMap();
 	}, false);
-	
+
 uploadData("input", loadCSV);
 d3.json("/usa-sm-q.json", drawMap);
