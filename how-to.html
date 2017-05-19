@@ -54,17 +54,17 @@
 			(at the very least the geographic identifiers) that you intend to use 
 			as UTF-8 encoded character strings before attempting to load it. 
 		</div>
-		<div class="par" id="noteNull">
-			<h3>Note on <span class="mono">null</span> types:</h3>
+		<div class="par">
+			Variable names in you dataset and the EO dataset can&rsquo;t be the same,
+			or the EO data will be overwritten.
+		</div>
+		<div class="par note" id="null">
+			<h4>Note on <span class="mono">null</span> types:</h4>
 			Variables should not be stored as <span class="mono">null</span> 
 			unless you expect them to be treated as zeros or if they are stored as a 
 			character string and you expect them to treated as missing values. 
 			Variables in this form have not been rigorously tested; you may 
 			risk data loss and failed or incorrect merges.
-		</div>
-		<div class="par">
-			Variable names in you dataset and the EO dataset can&rsquo;t be the same,
-			or the EO data will be overwritten.
 		</div>
 		<ol>
 			<li>
@@ -93,7 +93,7 @@
 				<div class="par">
 					If you are loading data with missing geographic identifirs, they 
 					should be stored as <span class="mono">NA</span> or 
-					<span class="mono">NaN</span> (see <a href="here">note</a> on 
+					<span class="mono">NaN</span> (see <a href="#null">note</a> on 
 					<span class="mono">null</span> values).
 				</div>
 			</li>
@@ -160,9 +160,11 @@
 				<div class="par">Click</div>
 			</li>
 		</ol>
-		<div class="par">
-			No p-values and stars. You&rsquo;ll have to pay close attention to the
-			value of the coefficient and the size of the standard error.	
+		<div class="par note">
+			<h4>Note on p-values:</h4>
+			P-values and stars are not currently supported. You&rsquo;ll have to 
+			pay close attention to the value of the coefficient and the size of 
+			the standard error.	
 		</div>
 		<h2 id="plot">Plotting:</h2>
 		<div class="par">
