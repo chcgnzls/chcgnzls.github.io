@@ -48,69 +48,71 @@
 		</div>
 		<h2 id="data">Using your own data:</h2>
 		<div class="par">
-			This site allows you to your own dataset that you&rsquo;d like
-			to explore that isn&rsquo;t already in the dataset. These files will 
-			not be saved. To prevent data loss, I suggest saving all of you data 
+			This site allows you upload and merge data to the EO dataset. 
+			These files will not be saved. To prevent data loss, I suggest 
+			saving all of you data 
 			(at the very least the geographic identifiers) that you intend to use 
 			as UTF-8 encoded character strings before attempting to load it. 
 		</div>
 		<div class="par">
+			<h3>Note on <span class="mono">null</span> types:</h3>
 			Variables should not be stored as <span class="mono">null</span> 
-			unless you expect them to be treated as zeros or they are stored as a 
+			unless you expect them to be treated as zeros or if they are stored as a 
 			character string and you expect them to treated as missing values. 
 			Variables in this form have not been rigorously tested; you may 
 			risk data loss and failed or incorrect merges.
 		</div>
 		<div class="par">
-			If any of your variables have the same name as a variable in the EO 
-			dataset, the EO data will be overwritten.
+			Variable names in you dataset and the EO dataset can&rsquo;t be the same,
+			or the EO data will be overwritten.
 		</div>
 		<ol>
 			<li>
 				<div class="par">
-					Click the top navigation bar at the top of the page, above 
+					Click the light gray bar at the top of the page, above 
 					the map&mdash;a dropdown box will open.	
 				</div>
 			</li>
 			<li>
 				<div class="par">
-					Click <div class="bttn">Choose a <span class="mono">.csv</span></div>.
-					Your machine will open a dialog box and allow you choose a file 
-					that will open in your machine&rsquo;s memory. 
+					Click <div class="bttn">Choose a <span class="mono">.csv</span></div>
+					A dialog box will open. Choose the file you want upload. 
 				</div>
 			</li>
 			<li>
 				<div class="par">
 					Once the file is successfully opened, the rest of the menu 
-					will be become active. Click on the selector at the top of the 
-					third column and choose the variable in your dataset that 
-					uniquely matches the geographic identifier in the Equality 
-					of Opportunity dataset. It must be a concatenation of the 2000 
+					will be become active. Click the dropdown box above the Information
+					box. Choose the variable in your dataset that will match to the EO 
+					dataset based on geographic geographic location. 
+					This geographic identifier must be a concatenation of the 2000 
 					two-digit state FIPS and three-digit county FIPS codes with 
 					leading zeros. 
+					For more information on FIPS codes click <a href="here">here</a>.
 				</div>
 				<div class="par">
-					If you are loading data with missing geographic identifies, they 
+					If you are loading data with missing geographic identifirs, they 
 					should be stored as <span class="mono">NA</span> or 
-					<span class="mono">NaN</span>.
+					<span class="mono">NaN</span> (see <a href="here">note</a> on 
+					<span class="mono">null</span> values).
 				</div>
 			</li>
 			<li>
 				<div class="par">
-					Upon completion, you should see some information about the success 
-					rate of the merge.	
+					Once your data is uploaded, you will see information about the 
+					success of the merge.	
 				</div>	
 				<div class="par">
 					There are two  ways for your merge to partially
-					or completely fail: your data contains codes not found in Equality 
-					of Opportunity data or vice versa.	
+					or completely fail: your data contains geographic identifiers not 
+					found in the EO data or vice versa.	
 				</div>
 				<div class="par">
-					If your merge partially (or completely) failed, you can download a 
-					<span class="mono">.json</span> file that the unmatched observations
-					from your data set and the identifiers of the unmatched observations
-					from the EO data. A generalized example of the file structure is 
-					below:
+					If the merge partially (or completely) failed, you can download a 
+					<span class="mono">.json</span> file that contains the unmatched 
+					observations from your dataset and some information about the 
+					unmatched observations from the EO dataset. A generalized example 
+					of the file structure is below:
 <div class="code">
 	{<br/>
 	unmatched_cli:<br/>
@@ -131,9 +133,7 @@
 				<div class="par">
 					If your merge was partially (or completely) successful, 
 					you&rsquo;ll be able to export the data as a 
-					<span class="mono">.csv</span><br/>
-					(At the very least, this site can be used as interactive tool to 
-					merge data.)
+					<span class="mono">.csv</span>
 				</div>
 			</li>
 		</ol>
@@ -149,7 +149,7 @@
 		<h2 id="reg">Regression Table:</h2>
 		<div class="par">
 			You can run an multi-variate Ordinary Least-Squares regression using the
-			outcomes and covariates in the EO dataset or between any two variables
+			EO dataset or any data you may have uploaded. 
 			of any data you may have opened.
 		</div>
 		<ol>
@@ -166,14 +166,14 @@
 		</div>
 		<h2 id="plot">Plotting:</h2>
 		<div class="par">
-			Some intro 	
+			This site a scatter plot feature. As default, the dependant variable is
+			grouped into 64 bins mean.	
 		</div>
 		<ol>
 			<li>
 				<div class="par">
 					Select the independent (y-axis) and dependent (x-axis) variables and
-					a monotonic transformation that might make sense for your
-					purposes.
+					a monotonic transformation when appropriate.
 				</div>
 				<div class="par">
 					It should plot immediately. Wow! One less click than the 
@@ -182,7 +182,7 @@
 			</li>
 			<li>
 				<div class="par">
-					You can fit the data to a linear or quadratic functional from using
+					You can fit the data to a linear or quadratic functional form using
 					the Fit Trend option.
 				</div>
 			</li>
