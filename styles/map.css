@@ -82,10 +82,7 @@ select.transform {
 	color: #222130;
 	background: #fff;
 }
-a#howTo, a#howto:visited {
-	text-align: center;
-	color: lightblue;
-}
+
 #input-field {
 	opacity: 0;
 	position: absolute;
@@ -496,4 +493,17 @@ a {
 }
 a:visited {
 	color: white;
+}
+a#howTo, a#howto:visited {
+	text-align: center;
+	text-decoration: none;
+	color: #343248;
+	transition: color .5s;
+}
+a#howTo:hover {
+	color: lightblue; 
+	transition: color .5s;
+}
+div#howTo {
+	text-align: center;
 }
