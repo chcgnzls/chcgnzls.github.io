@@ -9,6 +9,10 @@
 #content {
 	padding: 50px;
 }
+#noteNull {
+	background: #e2d0b9;
+	border-radius: 7px;
+}
 .bar{
 	background: #ebecec;
 	border-radius: 7px;
