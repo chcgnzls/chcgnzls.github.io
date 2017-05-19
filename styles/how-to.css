@@ -10,7 +10,7 @@
 	padding: 50px;
 }
 .bar{
-	background: rgba(175, 175, 175, .8);
+	background: #ebecec;
 	border-radius: 7px;
 	transition: background .5s;
 	display: inline-block;
@@ -19,7 +19,7 @@
 	margin: 8px;
 }
 .bar:hover {
-	background: rgba(255, 255, 255, .4);
+	background: rgba(175, 175, 175, .8);
 	transition: background .5s;
 }
 .bttn {
