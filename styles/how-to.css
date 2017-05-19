@@ -79,3 +79,7 @@ a {
 a:visited {
 	color: lightgray;
 }
+img {
+	border: 1px solid #222130;
+	margin: 5px;
+}

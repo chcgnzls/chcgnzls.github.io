@@ -89,7 +89,7 @@
 					This geographic identifier must be a concatenation of the 2000 
 					two-digit state FIPS and three-digit county FIPS codes with 
 					leading zeros. 
-					For more information on FIPS codes see <a href="https://usa.ipums.org/usa-action/variables/COUNTYFIPS#description_section">IPUMS description</a>.
+					For more information on FIPS codes see the <a href="https://usa.ipums.org/usa-action/variables/COUNTYFIPS#description_section" target="_blank">IPUMS description</a>.
 				</div>
 				<div class="par">
 					If you are loading data with missing geographic identifirs, they 
@@ -144,7 +144,7 @@
 		</div>
 		<div class="par">
 			Multiple datasets can be opened and merged as long as they don&rsquo;t 
-			have the same variable names of the EO data or your previously 
+			have the same variable names of those in the EO data or your previously 
 			loaded files.
 		</div>
 		<h2 id="reg">Regression Table:</h2>
@@ -154,11 +154,30 @@
 		</div>
 		<ol>
 			<li>
-				<div class="par">Point</div>
+				<div class="par">
+					Click the light gray box next to the left of the plot; a box will 
+					open with options for a regression specification.
+					<img src="styles/imgs/show-reg.png" style="height:150px;width:300px">
+				</div>
 			</li>
 			<li>
-				<div class="par">Click</div>
+				<div class="par">
+					Select an outcome as the left-hand-side variable of the
+					regression you&rsquo;d like to run and select any number of 
+					right-hand-side variables from the available covariates.
+				</div>
+				<div class="par">
+					If you successfully uploaded any data you should see those variables 
+					at the top of each list.
+				</div>
 			</li>
+			<li>
+				<div class="par">
+					Click <div class="bttn">Run!</div> and a table of regression 
+					coefficients, standard errors, number of observations, R&sup2;, and 
+					F-test will load to the right of plot if your specification 
+					wasn&rsquo;t malformed.
+				</div>
 		</ol>
 		<div class="par note">
 			<h4>Note on p-values:</h4>
@@ -174,6 +193,13 @@
 			number of observations in each bin.	
 		</div>
 		<ol>
+			<li>
+				<div class="par">
+					To open the plotting options window, click the light gray box to the
+					right of the regression table.
+					<img src="styles/imgs/show-plot.png">
+				</div>
+			</li>
 			<li>
 				<div class="par">
 					Select the independent (y-axis) and dependent (x-axis) variables and
