@@ -3,13 +3,11 @@
 	fill: none;
 	pointer-events: all;
 }
-
 .land {
 	fill: #ddd;
 	stroke: #fff;
 	stroke-opacity: 0;
 }
-
 /* CLASSES */
 .cleared {
 	clear: both;
@@ -22,7 +20,6 @@
 	margin: 5px;
 	border-radius: 5px;
 }
-
 .dataC {
 	float: left;
 	margin-right: 10px;
@@ -84,6 +81,10 @@ select.transform {
 	font-family: monospace;
 	color: #222130;
 	background: #fff;
+}
+a#howTo, a#howto:visited {
+	text-align: center;
+	color: lightblue;
 }
 #input-field {
 	opacity: 0;
