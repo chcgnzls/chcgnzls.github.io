@@ -1,67 +1,180 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="styles/about.css">
-<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet"> 
+<!DOCTYPE HTML>
 <meta charset="utf-8">
-<title>About</title>
-</head>
+<title>Exploring Opportunity</title>
+<link rel="stylesheet" type="text/css" href="styles/map.css"> 
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Playfair+Display|Raleway|Old+Standard+TT|Open+Sans|Crimson+Text" rel="stylesheet">
 <body>
-	<div id="topBar">
-		<div class="bottomAlign" id="main-nav">
-			<ul class="nav">
-				<li><a href="exploring-opportunity" target="_blank" class="nav">
-					Exploring Opportunity</a></li>
-			</ul>
+	<h1>Exploring Opportunity</h1>
+	<div id="howTo">
+	<a id="howTo" href="how-to">How to use this site</a>
+	</div>
+	<div id="dropContainer">
+		<div id="dropdown" onclick="showHide('dataContainer')"></div>
+		<div class="closed" id="dataContainer">
+			<h2 style="margin-left:7px">Use your own data</h2>
+			<div class="dataC" id="uploadContainer">
+				<div id="fileBttn">
+					<label class="bttn">Choose a <span class="mono">.csv</span><input type="file" id="input" style="display:none"/></label>
+				</div>
+				<div id="previewShadow">
+					<h5>Preview:</h5>
+					<div class="preview-box" id="uploadPreview"></div>	
+				</div>
+			</div>
+			<div class="dataC mergeShadow">
+				<h4>Merge:</h4>	
+				<p>Choose a variable that uniquely matches your geographies. It 
+					must be a character string concatenation of the two-digit State and 
+					three-digit County FIPS codes with leading zeros. 
+				</p>
+				<p>For example: <span class="mono">35039</span> or 
+					<span class="mono">01001</span>
+				</p>
+				<p style="margin-bottom:0">Missing values, should be of the form: 
+					<span class="mono">NA</span> or
+					<span class="mono">NaN</span>
+				</p>
+			</div>
+			<div class="dataC">
+				<span class="mergeShadow">
+					<select disabled="true" id="idSelect">
+						<option id="load"></option>
+					</select>
+				</span>
+				<div id="mergeResults">
+					<h5>Information:</h5>
+					<div class="preview-box" id="information"></div>
+					<div class="bttn" id="missing">Download missing as <span class="mono">.json</span></div>
+					<div class="bttn" id="merged">Export merged dataset as <span class="mono">.csv</span></div>
+				</div>
+			</div>
+			<div class="cleared"></div>
 		</div>
 	</div>
-	<div class="content">
-		<h1>t&#643;&#603;&rsquo; ko&#720;</h1>
-		<p>I&rsquo;m a medical student in University of New Mexico's Combined
-			BA/MD Program. I completed an interdisciplinary BA in 
-			Mathematics &amp; Statistics, Physical &amp; Natural Sciences, and 
-			Social Sciences with minors in Navajo Language &amp; Linguistics and 
-			Chicana &amp; Chicano Studies in 2015 and was a Visiting Student in the 
-			Dept. of Economics at Harvard's Graduate School of Arts and Sciences in 
-			2015-2017.</p>
-		<div class="lal">
-			Email me: <a href="mailto:chc.gnzls@gmail.com?Subject=Y&aacute;&#39;&aacute;&aacute;t&#39;&eacute;&eacute;h" target="_top">chc.gnzls@gmail.com</a>
+	<div class="contentWrapper">
+		<div id="mapLoader0"></div>
+		<div class="mainContent" id="mapContainer" onclick='showHide("inputContainer", "hide")'></div>
+		<div class="mainContent" id="input-field">
+			<div id="showInput" onclick="showHide('inputContainer')"></div>
+			<div id="inputContainer">
+				<div class="container" id="outcomeContainer">
+					<h2>Mapping Mobility</h2>
+				</div>
+				<div class="container">
+					<h3>Outcome:</h3>
+					<select id="outcomeSelector">
+						<option class="default" value="perm_res_p25_kr26">perm_res_p25_kr26</option>
+					</select>
+					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
+					<select class="full transform" id="outMonTrans">
+						<option class="null" value="null"></option>
+						<option value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
+						<option value="expx">exp(x&#7522;)</option>
+				</select>
+				</div>
+				<div class="container" id="tooltipOptionConatiner">
+					<h3>Summary Variables:</h3>	
+					<div class="tooltipOption"><input type="checkbox" class="ttOpt" value="cty_pop2000" name="Population" checked="checked">Population</input></div>
+					<div class="tooltipOption"><input type="checkbox" class="ttOpt" value="unemp_rate" name="Unemployment" checked="checked">Unemployment</input></div>
+					<div class="tooltipOption"><input type="checkbox" class="ttOpt" value="cs_labforce" name="Labor Force Participation">Labor Force Participation</input></div>
+					<div class="tooltipOption"><input type="checkbox" class="ttOpt" value="poor_share" name="Percent Below FPL">Percent Below Federal Poverty Level</input></div>
+					<div class="tooltipOption"><input type="checkbox" class="ttOpt" value="median_house_value" name="Median Home Value">Median Home Value</input></div>
+				</div>
+				<div class="container">
+					<h3>Colors:</h3>
+					<input value='["#222130","#add8e6"]' id="colorInput">
+				</div>
+			</div>
 		</div>
-		<div class="ral">
-			<a href="files/CV_sgonzales.pdf" target="_blank">View my CV</a>
+	</div>
+	<div class="cleared" style="height:64px"></div>
+	<div class="mainContent" id="resultsContainer">
+		<div id="resultsSidebar">
+			<div class="closed" id="resultsOpts">
+				<div class="container">
+					<h2>Correlating Mobility</h2>
+				</div>
+				<div class="container">
+					<h3>LHS:</h3>
+					<select id="lhsSelect">
+						<option value="perm_res_p25_kr26">perm_res_p25_kr26</option>
+					</select>
+				</div>
+				<div class="container" id="rhsContainer">
+					<h3>RHS:</h3>
+					<div id="rhsSelect"></div>
+				</div>
+				<div align="center"><div class="bttn" id="predict" onclick='showHide("plotOpts","hide")'>Run!</div></div>
+			</div>
+			<div id="showResults" onclick="showHide('resultsOpts')"></div>
 		</div>
-		<div style="clear: both"></div>
-		<h2>Research Interests</h2>
-		<p>My research has documented growing disparity in the rates of 
-			tissue plasminogen activator (tPA) utilization in rural and urban 
-			hospitals and the effectiveness of Primary Stroke Center accreditation in
-			closing the gap. I have also shown substantial variation in 
-			rates of health insurance coverage among different Latino groups, 
-			differences in the relationships with the likelihood of having health 
-			insurance with factors such as immigration status, 
-			and that reductions in coverage disparities both among 
-			Latinos and between Latinos and Whites were concurrent with 
-			implementation of the Affordable Care Act (ACA) and Medicaid expansion.
-		</p>
-		<p>Currently, I&rsquo;m interested in identifying modern and historical
-			sources of structural inequity, particularly in the Southwest and West.
-		</p>
-		<h2>Publications</h2>	
-		<p><a href="https://dash.harvard.edu/handle/1/32749951" target="_blank"><b>Gonzales, S</b> and Sommers BD (2017) 
-			&ldquo;Intra-Ethnic Coverage Disparities and Effects on Health 
-			Reform.&rdquo; <i>Health Services Research.</i> Forthcoming.</a>
-		</p>
-		<p><a href="http://www.neurology.org/content/88/5/441.abstract" 
-			target="_blank">
-			<b>Gonzales, S</b>, Mullen, M, Skolarus, L, Thibault, D, Udoeyo, U,
-			and Willis, A (2017) &ldquo;Progressive Rural-Urban Disparity in Acute
-			Stroke Care.&rdquo; <i>Neurology</i>. 88:441-448.</a>
-		</p>
-		<h1 align="center" style="font-weight: normal">&#9877;</h1>
+		<div id="plotSidebar">
+			<div id="showPlot" onclick="showHide('plotOpts')"></div>
+			<div class="closed"class="closed"  id="plotOpts">
+				<div class="container">
+					<h2>Plotting Mobility</h2>
+				</div>
+				<div class="container">
+					<h3>Independent Variable:</h3>
+					<select class="full" id="indVarSelect">
+						<option class="default" value="perm_res_p25_kr26">perm_res_p25_kr26</option>
+					</select>
+					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
+					<select class="full transform" id="indMonTrans">
+						<option class="load" value="null"></option>
+						<option class="transform" value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option class="transform" value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
+						<option class="transform" value="expx">exp(x&#7522;)</option>
+				</select>
+				</div>
+				<div class="container">
+					<h3>Dependent Variable:</h3>
+					<select class="full" id="depVarSelect">
+						<option class="default" value="cs_fam_wkidsinglemom">cs_fam_wkidsinglemom</option>
+					</select>
+					<h5 style="font-weight:normal">Monotonic Transformation (optional):</h5>
+					<select class="full transform" id="depMonTrans">
+						<option class="null" value="null"></option>
+						<option value="logx">log(x&#7522; - min{x + 1 | x &le; 0})</option>
+						<option value="sqrtx">sqrt(x&#7522; - min{x | x &lt; 0})</option>
+						<option value="expx">exp(x&#7522;)</option>
+					</select>
+				</div>
+				<div class="container">
+					<h3>Fit Tend:</h3>
+					<select class="full" id="trendSelect">
+						<option class="null" value="null"></option>
+						<option value="line">Line</option>
+						<option value="quad">Quadratic</option>
+						<option value="local" disabled="disabled">Local Polynomial</option>
+					</select>
+				</div>
+				<div class="container">
+					<h3>Number of Bins</h3>
+					<input value="64" id="binNumber">
+				</div>
+			</div>
+		</div>
+		<div id="outputContainer">
+			<div class="results" id="plotContainer">
+				<div id="plot"></div>
+			</div>
+			<div class="results" id="regTableContainer" onclick='showHide("plotOpts","hide")'>
+				<h2 class="instructions">OLS Regression:</h2>
+				<div id="regTable"></div>
+			</div>	
+		</div>
 	</div>
-	<div id="bottomBar">
-		<div class="bottom"></div>
+	<div class="cleared" id="bottomBar">
+		<h1 style="color:snow;margin:10px;">&#9633;</h1>
+		<p>This project makes use of <a href="https://d3js.org/" target="_blank">D3.js</a> and <a href="http://www.numericjs.com/" target="_blank">Numeric.js</a> for visualization and numerical methods. It&rsquo;s developed and maintained by <a href="http://www.chcgnzls.com" target="_blank">Checo Gonzales</a>. <a href="mailto:chc.gnzls@gmail.com?Subject=Exploring%20Opportunity:%20[something%20specific]" target="_top">Questions, comments</a>, and <a href="https://github.com/chcgnzls/exploring-opportunity" target="_blank">contributions</a> are encouraged.
+		</p>
+		<p>The publicly available data comes from <a href="https://www.nhgis.org/" target="_blank">NHGIS</a>, the <a href="https://www.census.gov/" target="_blank">US Census Bureau</a>, <a href="http://www.equality-of-opportunity.org/data" target="_blank">Chetty, et al. (2014)</a>, or from wherever you collected yours.
+		</p>
 	</div>
+	<script src="scripts/d3.v4.js" charset="utf-8"></script>
+	<script src="scripts/topojson.v1.js"></script>
+	<script src="scripts/numeric-1.2.6.js"></script>
+	<script src="scripts/map.js"></script>
 </body>
-</html>
